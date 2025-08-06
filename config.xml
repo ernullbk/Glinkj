@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.example.snappfood" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>SnappfoodLoginApp</name>
+  <description>A Cordova app for Snappfood authentication</description>
+  <author email="you@example.com" href="http://example.com">Your Name</author>
+  <platform name="android">
+    <icon src="res/icon.png" />
+    <splash src="res/splash.png" />
+  </platform>
+
+  <preference name="orientation" value="portrait" />
+  <!-- Other preferences -->
+  <plugin name="cordova-plugin-inappbrowser" />
+</widget>
