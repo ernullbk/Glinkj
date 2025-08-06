@@ -1,0 +1,60 @@
+name: Build Android APK
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+
+    env:
+      ANDROID_SDK_ROOT: ${{ env.ANDROID_SDK_ROOT }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # or a compatible version
+
+      - name: Install Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+          sdk-version: 'latest'
+          build-tools: '30.0.3'  # or your version
+
+      - name: Cache Android SDK
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.ANDROID_SDK_ROOT }}
+          key: ${{ runner.os }}-android-sdk
+          restore-keys: |
+            ${{ runner.os }}-android-sdk
+
+      - name: Install Cordova CLI
+        run: npm install -g cordova
+
+      - name: Install project dependencies
+        run: npm install
+
+      - name: Add Android platform
+        run: cordova platforms add android
+
+      - name: Build APK
+        run: cordova build android --debug --no-update-config
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug.apk
+          path: platforms/android/app/build/outputs/apk/debug/app-debug.apk
