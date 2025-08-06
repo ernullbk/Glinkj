@@ -1,0 +1,13 @@
+{
+  "name": "snappfood-login",
+  "version": "1.0.0",
+  "description": "Cordova app for Snappfood login via JWT",
+  "cordova": {
+    "platforms": ["android"]
+  },
+  "dependencies": {
+    "cordova": "^12.0.0",
+    "cordova-plugin-inappbrowser": "^4.0.0"
+  },
+  "devDependencies": {}
+}
